@@ -23,6 +23,7 @@ class _MainPageState extends State<MainPage>
 }
 
 class _MainViewGetX extends GetView<MainController> {
+  // ignore: use_super_parameters
   const _MainViewGetX({Key? key}) : super(key: key);
 
   // 主视图
