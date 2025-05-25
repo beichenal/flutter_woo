@@ -1,3 +1,3 @@
-library utils;
+library;
 
 export "storage.dart";

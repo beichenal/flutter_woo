@@ -1,4 +1,4 @@
-library text;
+library;
 
 export './controller.dart';
 export './view.dart';

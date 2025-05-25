@@ -1,4 +1,4 @@
-library product_details;
+library;
 
 export './controller.dart';
 export './view.dart';

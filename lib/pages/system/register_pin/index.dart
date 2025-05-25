@@ -1,4 +1,4 @@
-library register_pin;
+library;
 
 export './controller.dart';
 export './view.dart';

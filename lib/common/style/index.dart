@@ -1,4 +1,4 @@
-library style;
+library;
 
 export 'scale.dart';
 export 'radius.dart';

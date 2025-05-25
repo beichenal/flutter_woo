@@ -1,4 +1,4 @@
-library apply_promo_code;
+library;
 
 export './controller.dart';
 export './view.dart';

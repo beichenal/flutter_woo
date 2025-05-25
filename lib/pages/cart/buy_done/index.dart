@@ -1,4 +1,4 @@
-library buy_done;
+library;
 
 export 'controller.dart';
 export 'view.dart';

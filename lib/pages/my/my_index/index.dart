@@ -1,4 +1,4 @@
-library my_index;
+library;
 
 export './controller.dart';
 export './view.dart';

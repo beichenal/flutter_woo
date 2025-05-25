@@ -1,4 +1,4 @@
-library pages;
+library;
 
 export 'cart/apply_promo_code/index.dart';
 export 'cart/buy_done/index.dart';

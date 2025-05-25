@@ -1,4 +1,4 @@
-library profile_edit;
+library;
 
 export './controller.dart';
 export './view.dart';

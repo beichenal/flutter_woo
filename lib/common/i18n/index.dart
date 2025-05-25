@@ -1,4 +1,4 @@
-library i18n;
+library;
 
 export "locale_keys.dart";
 export "locales/locale_en.dart";
