@@ -1,0 +1,60 @@
+name: flutter_woo
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+environment:
+  sdk: ^3.6.0
+
+
+# app 图标
+icons_launcher:
+  image_path: "assets/icons/ic_logo.png"
+  platforms:
+    android:
+      enable: true
+      notification_image: "assets/icons/ic_foreground.png"
+      # adaptive_background_color: '#ffffff'
+      adaptive_background_image: "assets/icons/ic_background.png"
+      adaptive_foreground_image: "assets/icons/ic_foreground.png"
+    ios:
+      enable: true
+
+fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+          weight: 700
+
+dependencies:
+  flutter_localizations:
+    sdk: flutter
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  get: ^4.7.2
+  package_info_plus: ^8.3.0
+  shared_preferences: ^2.5.3
+  dio: ^5.8.0+1
+  adaptive_theme: ^3.7.0
+  ducafe_ui_core: ^1.0.6
+  cached_network_image: ^3.4.1
+  flutter_svg: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  icons_launcher: ^3.0.1
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/svgs/
