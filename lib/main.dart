@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
                   locale: ConfigService.to.locale, // 当前语言种类
                   fallbackLocale: Translation.fallbackLocale, // 默认语言种类
 
-                  initialRoute: RouteNames.stylesStylesIndex,
+                  initialRoute: RouteNames.systemSplash,
                   getPages: RoutePages.list,
                   navigatorObservers: [RoutePages.observer],
 

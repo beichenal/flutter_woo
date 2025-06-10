@@ -22,7 +22,7 @@ class ImagePage extends GetView<ImageController> {
       // 本地图片
       const Text("本地图片"),
       const ImageWidget.img(
-        AssetsImages.homePlaceholderPng,
+        AssetsImages.splashPng,
         fit: BoxFit.cover,
       ).tight(
         width: width,
