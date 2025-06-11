@@ -32,6 +32,18 @@ fonts:
           weight: 500
         - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
           weight: 700
+# 启动图适配 android 11 及以下, 12 以上，IOS
+flutter_native_splash:
+  web: false
+  color_android: "#ffffff"
+  background_image_android: "assets/launcher/background.png"
+  background_image_ios: "assets/launcher/background.png"
+  image_ios: "assets/launcher/android.png"
+  android_12:
+    image: "assets/launcher/android12.png"
+    icon_background_color: "#324ea1"
+
+
 
 dependencies:
   flutter_localizations:
@@ -47,12 +59,14 @@ dependencies:
   ducafe_ui_core: ^1.0.6
   cached_network_image: ^3.4.1
   flutter_svg: ^2.1.0
+  carousel_slider: ^5.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
   icons_launcher: ^3.0.1
+  flutter_native_splash: ^2.4.4
 flutter:
   uses-material-design: true
   assets:

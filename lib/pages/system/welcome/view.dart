@@ -1,16 +1,59 @@
+import 'package:ducafe_ui_core/ducafe_ui_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../common/index.dart';
 import 'index.dart';
 
 class WelcomePage extends GetView<WelcomeController> {
   const WelcomePage({super.key});
 
-  // 主视图
-  Widget _buildView() {
-    return const Center(
-      child: Text("WelcomePage"),
+  /// 控制栏
+  Widget _buildBar() {
+    return GetBuilder<WelcomeController>(
+      id: "bar",
+      init: controller,
+      builder: (controller) {
+        return <Widget>[
+          // 指示标
+          SliderIndicatorWidget(
+            length: 3,
+            currentIndex: controller.currentIndex,
+          ),
+        ].toRow(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        );
+      },
     );
+  }
+
+  /// 轮播图
+  Widget _buildSlider() {
+    return GetBuilder<WelcomeController>(
+      id: "slider",
+      init: controller,
+      builder: (controller) => controller.items == null
+          ? const SizedBox()
+          : WelcomeSliderWidget(
+              controller.items!,
+              onPageChanged: controller.onPageChanged,
+            ),
+    );
+  }
+
+  /// 主视图
+  Widget _buildView() {
+    return <Widget>[
+      // slider切换
+      _buildSlider(),
+
+      // 控制栏
+      _buildBar(),
+    ]
+        .toColumn(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        )
+        .paddingAll(AppSpace.page);
   }
 
   @override
@@ -20,7 +63,7 @@ class WelcomePage extends GetView<WelcomeController> {
       id: "welcome",
       builder: (_) {
         return Scaffold(
-          appBar: AppBar(title: const Text("welcome")),
+          // appBar: AppBar(title: const Text("welcome")),
           body: SafeArea(
             child: _buildView(),
           ),
