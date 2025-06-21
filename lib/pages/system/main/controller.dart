@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../../../common/index.dart';
+
 class MainController extends GetxController {
   MainController();
 
@@ -18,6 +20,8 @@ class MainController extends GetxController {
   void onReady() {
     super.onReady();
     _initData();
+    // 跳转注册页
+    Get.toNamed(RouteNames.systemRegister);
   }
 
   // @override

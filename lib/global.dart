@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_woo/common/utils/loading.dart';
 import 'package:get/get.dart';
 import 'common/index.dart';
 
@@ -7,6 +8,7 @@ class Global {
     // 插件初始化
     WidgetsFlutterBinding.ensureInitialized();
     Storage().init();
+    Loading();
     Get.put<WPHttpService>(WPHttpService());
 
     // 初始化队列

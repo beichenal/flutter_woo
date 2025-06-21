@@ -17,7 +17,6 @@ class ConfigService extends GetxService {
 
   // 单例写法
   static final ConfigService _instance = ConfigService._internal();
-
   factory ConfigService() => _instance;
 
   ConfigService._internal();
@@ -39,6 +38,16 @@ class ConfigService extends GetxService {
   // 获取包信息
   Future<void> getPlatform() async {
     _platform = await PackageInfo.fromPlatform();
+  }
+
+  // 是否首次打开
+  Future<bool> getAlreadyOPen() async {
+    return await Storage().getBool(Constants.storageAlreadyOpen);
+  }
+
+  // 标记已打开app
+  void setAlreadyOpen() {
+    Storage().setBool(Constants.storageAlreadyOpen, true);
   }
 
   // 初始 theme

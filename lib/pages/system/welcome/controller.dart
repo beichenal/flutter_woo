@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_woo/common/index.dart';
 import 'package:get/get.dart';
 
@@ -8,9 +9,15 @@ class WelcomeController extends GetxController {
 
   int currentIndex = 0;
 
+  bool isShowStart = false;
+
+  /// slider 控制器
+  CarouselSliderController carouselController = CarouselSliderController();
+
   /// 当前位置发生改变
   void onPageChanged(int index) {
     currentIndex = index;
+    isShowStart = currentIndex == 2;
     update(['slider', 'bar']);
   }
 
@@ -38,6 +45,17 @@ class WelcomeController extends GetxController {
 
   void onTap() {}
 
+  /// 去首页
+  void onToMain() {
+    /// 跳转首页, 并关闭所有页面
+    Get.offAllNamed(RouteNames.systemMain);
+  }
+
+  /// 下一个
+  void onNext() {
+    carouselController.nextPage();
+  }
+
   // @override
   // void onInit() {
   //   super.onInit();
@@ -46,6 +64,8 @@ class WelcomeController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+
+    ConfigService().setAlreadyOpen();
     _initData();
   }
 
