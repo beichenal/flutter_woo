@@ -14,4 +14,20 @@ class UserApi {
     }
     return false;
   }
+
+  /// 登录
+  static Future<UserTokenModel> login(UserLoginReq? req) async {
+    var res = await WPHttpService.to.post(
+      '/users/login',
+      data: req,
+    );
+    return UserTokenModel.fromJson(res.data);
+  }
+
+  /// Profile
+  static Future<UserProfileModel> profile() async {
+    var res = await WPHttpService.to.get('/user/me');
+
+    return UserProfileModel.fromJson(res.data);
+  }
 }

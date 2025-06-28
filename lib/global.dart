@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_woo/common/utils/loading.dart';
 import 'package:get/get.dart';
 import 'common/index.dart';
 
@@ -10,7 +9,7 @@ class Global {
     Storage().init();
     Loading();
     Get.put<WPHttpService>(WPHttpService());
-
+    Get.put<UserService>(UserService());
     // 初始化队列
     await Future.wait([
       // 配置服务

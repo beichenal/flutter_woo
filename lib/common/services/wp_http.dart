@@ -5,12 +5,6 @@ import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 
 import '../index.dart';
 
-// 退出并重新登录
-Future<void> _errorNoAuthLogout() async {
-  // await UserService.to.logout();
-  Get.toNamed(RouteNames.systemLogin);
-}
-
 class WPHttpService extends GetxService {
   static WPHttpService get to => Get.find();
 
@@ -101,6 +95,12 @@ class WPHttpService extends GetxService {
   }
 }
 
+// 退出并重新登录
+Future<void> _errorNoAuthLogout() async {
+  await UserService.to.logout();
+  Get.toNamed(RouteNames.systemLogin);
+}
+
 /// 拦截
 class RequestInterceptors extends Interceptor {
   @override
@@ -108,9 +108,9 @@ class RequestInterceptors extends Interceptor {
     // super.onRequest(options, handler);
 
     // // http header 头加入 Authorization
-    // if (UserService.to.hasToken) {
-    //   options.headers['Authorization'] = 'Bearer ${UserService.to.token}';
-    // }
+    if (UserService.to.hasToken) {
+      options.headers['Authorization'] = 'Bearer ${UserService.to.token}';
+    }
 
     return handler.next(options);
     // 如果你想完成请求并返回一些自定义数据，你可以resolve一个Response对象 `handler.resolve(response)`。
