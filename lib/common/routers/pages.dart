@@ -1,3 +1,4 @@
+import 'package:flutter_woo/pages/system/main/binding.dart';
 import 'package:get/get.dart';
 import 'names.dart';
 import 'package:flutter_woo/pages/index.dart';
@@ -101,9 +102,9 @@ class RoutePages {
       page: () => const LoginPage(),
     ),
     GetPage(
-      name: RouteNames.systemMain,
-      page: () => const MainPage(),
-    ),
+        name: RouteNames.systemMain,
+        page: () => const MainPage(),
+        binding: MainBinding()),
     GetPage(
       name: RouteNames.systemRegister,
       page: () => const RegisterPage(),

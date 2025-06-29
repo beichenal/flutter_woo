@@ -27,9 +27,8 @@ class RegisterPinController extends GetxController {
         return Loading.error(
             LocaleKeys.commonMessageIncorrect.trParams({"method": "Pin"}));
       }
-
-      // // 注册提交
-      // bool isOk = await UserApi.register(req);
+      // 注册提交
+      // bool isOk = await UserApi.register();
       // if (isOk) {
       //   Loading.success(
       //       LocaleKeys.commonMessageSuccess.trParams({"method": "Register"}));

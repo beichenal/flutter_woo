@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/index.dart';
@@ -9,6 +10,7 @@ class SplashController extends GetxController {
     // 欢迎页
 
     ConfigService().getAlreadyOPen().then((opened) {
+      debugPrint("splash page opened $opened");
       if (opened) {
         Get.offAllNamed(RouteNames.systemMain);
       } else {
@@ -23,10 +25,11 @@ class SplashController extends GetxController {
 
   void onTap() {}
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
+  @override
+  void onInit() {
+    super.onInit();
+    AppTheme.setSystemStyle();
+  }
 
   @override
   void onReady() {

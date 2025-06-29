@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_woo/common/index.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import 'global.dart';
 
@@ -27,7 +28,14 @@ class MyApp extends StatelessWidget {
             dark: AppTheme.dark,
             initial: ConfigService.to.themeMode,
             debugShowFloatingThemeButton: true, // 显示主题按钮
-            builder: (theme, darkThem) => GetMaterialApp(
+            builder: (theme, darkThem) => RefreshConfiguration(
+                headerBuilder: () => const ClassicHeader(),
+                footerBuilder: () => const ClassicFooter(), // 自定义刷新尾部
+                hideFooterWhenNotFull: true, // 当列表不满一页时,是否隐藏刷新尾部
+                headerTriggerDistance: 80, // 触发刷新的距离
+                maxOverScrollExtent: 100, // 最大的拖动距离
+                footerTriggerDistance: 150, // 触发加载的距离
+                child: GetMaterialApp(
                   title: 'Flutter Demo',
                   // 主题
                   theme: theme,
@@ -54,7 +62,7 @@ class MyApp extends StatelessWidget {
                         child: widget);
                   },
                   debugShowCheckedModeBanner: false,
-                )));
+                ))));
   }
 }
 

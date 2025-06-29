@@ -66,4 +66,16 @@ Map<String, String> localeZh = {
   LocaleKeys.loginBackDesc: '登陆后继续',
   LocaleKeys.loginBackFieldEmail: '账号',
   LocaleKeys.loginBackFieldPassword: '登陆密码',
+
+  // APP 导航
+  LocaleKeys.tabBarHome: '首页',
+  LocaleKeys.tabBarCart: '购物车',
+  LocaleKeys.tabBarMessage: '消息',
+  LocaleKeys.tabBarProfile: '我的',
+
+  // 商品 - 首页
+  LocaleKeys.gHomeSearch: '搜索商品',
+  LocaleKeys.gHomeFlashSell: '热卖商品',
+  LocaleKeys.gHomeNewProduct: '新上商品',
+  LocaleKeys.gHomeMore: '所有',
 };
