@@ -4,6 +4,9 @@ import 'package:flutter_woo/common/index.dart';
 import 'package:get/get.dart';
 
 import 'index.dart';
+import 'widgets/tab_detail.dart';
+import 'widgets/tab_product.dart';
+import 'widgets/tab_reviews.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({Key? key}) : super(key: key);
@@ -65,18 +68,122 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
   }
 
   // 商品标题
-  Widget _buildTitle() {
-    return const Text("滚动图");
+  Widget _buildTitle(BuildContext context) {
+    return <Widget>[
+      // 金额、打分、喜欢
+      <Widget>[
+        // 金额
+        TextWidget.h3(
+          "\$${controller.product?.price ?? 0}",
+        ).expanded(),
+        // 打分
+        IconWidget.icon(
+          Icons.star,
+          text: "4.5",
+          size: 20,
+          color: context.colors.scheme.primary,
+        ).paddingRight(AppSpace.iconTextMedium),
+        // 喜欢
+        IconWidget.icon(
+          Icons.favorite,
+          text: "100+",
+          size: 20,
+          color: context.colors.scheme.primary,
+        ),
+      ].toRow(),
+
+      // 次标题
+      TextWidget.label(
+        controller.product?.shortDescription?.clearHtml ?? "-",
+      ),
+    ]
+        .toColumn(
+          // 左对齐
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // 垂直间距
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        )
+        .paddingAll(AppSpace.page);
+  }
+
+  // Tab 栏位按钮
+  Widget _buildTabBarItem(BuildContext context, String textString, int index) {
+    return ButtonWidget.outline(
+      textString,
+      onTap: () => controller.onTapBarTap(index),
+      borderRadius: 17,
+      borderColor: Colors.transparent,
+      textColor: controller.tabIndex == index
+          ? context.colors.scheme.onSecondary
+          : context.colors.scheme.onPrimaryContainer,
+      backgroundColor: controller.tabIndex == index
+          ? context.colors.scheme.primary
+          : context.colors.scheme.onPrimary,
+    ).tight(
+      width: 100.w,
+      height: 35.h,
+    );
   }
 
   // Tab 栏位
-  Widget _buildTabBar() {
-    return const Text("Tab 栏位");
+  Widget _buildTabBar(BuildContext context) {
+    return GetBuilder<ProductDetailsController>(
+      tag: tag,
+      id: "product_tab",
+      builder: (_) {
+        return <Widget>[
+          _buildTabBarItem(context, LocaleKeys.gDetailTabProduct.tr, 0),
+          _buildTabBarItem(context, LocaleKeys.gDetailTabDetails.tr, 1),
+          _buildTabBarItem(context, LocaleKeys.gDetailTabReviews.tr, 2),
+        ].toRowSpace(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+        );
+      },
+    );
   }
 
   // TabView 视图
   Widget _buildTabView() {
-    return const Text("TabView 视图");
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(20.w, 0.w, 20.w, 0.w),
+        child: TabBarView(
+          controller: controller.tabController,
+          children: [
+            // 规格
+            TabProductView(uniqueTag: uniqueTag),
+            // 详情
+            TabDetailView(uniqueTag: uniqueTag),
+            // 评论
+            TabReviewsView(uniqueTag: uniqueTag),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // 底部按钮
+  Widget _buildButtons(BuildContext context) {
+    return <Widget>[
+      // 加入购物车
+      ButtonWidget.outline(
+        LocaleKeys.gDetailBtnAddCart.tr,
+      ).expanded(),
+
+      // 间距
+      SizedBox(width: AppSpace.iconTextLarge),
+
+      // 立刻购买
+      ButtonWidget.primary(
+        LocaleKeys.gDetailBtnBuy.tr,
+      ).expanded(),
+    ]
+        .toRow(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        )
+        .paddingHorizontal(AppSpace.page);
   }
 
   // 主视图
@@ -88,13 +195,16 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
             _buildBanner(context),
 
             // 商品标题
-            _buildTitle(),
+            _buildTitle(context),
 
             // Tab 栏位
-            _buildTabBar(),
+            _buildTabBar(context),
 
             // TabView 视图
             _buildTabView(),
+
+            // 底部按钮
+            _buildButtons(context),
           ].toColumn();
   }
 

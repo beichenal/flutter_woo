@@ -12,3 +12,5 @@ export "./refresher.dart";
 export "./placehold.dart";
 export "./appbar.dart";
 export "./gallery.dart";
+export "./colors_list.dart";
+export "./tags_list.dart";

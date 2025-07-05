@@ -172,21 +172,34 @@ class HomeController extends GetxController {
     bannerItems = await SystemApi.banners();
     // 分类
     categoryItems = await ProductApi.categories();
-    // 保存离线数据 - 基础数据
-    Storage().setJson(Constants.storageProductsCategories, categoryItems);
+
     // 推荐商品
     flashShellProductList =
         await ProductApi.products(ProductsReq(featured: true));
     // 新商品
     newProductProductList = await ProductApi.products(ProductsReq());
 
-    update(["home"]);
+    // 颜色
+    var attributeColors = await ProductApi.attributes(1);
+
+    // 尺寸
+    var attributeSizes = await ProductApi.attributes(2);
+
+    // 保存离线数据 - 基础数据
+    Storage()
+        .setJson(Constants.storageProductsAttributesColors, attributeColors);
+    Storage().setJson(Constants.storageProductsCategories, categoryItems);
+
+    // 尺寸定义
+    Storage().setJson(Constants.storageProductsAttributesSizes, attributeSizes);
 
     // // 保存离线数据
-    // Storage().setJson(Constants.storageHomeBanner, bannerItems);
-    // Storage().setJson(Constants.storageHomeCategories, categoryItems);
-    // Storage().setJson(Constants.storageHomeFlashSell, flashShellProductList);
-    // Storage().setJson(Constants.storageHomeNewSell, newProductProductList);
+    Storage().setJson(Constants.storageHomeBanner, bannerItems);
+    Storage().setJson(Constants.storageHomeCategories, categoryItems);
+    Storage().setJson(Constants.storageHomeFlashSell, flashShellProductList);
+    Storage().setJson(Constants.storageHomeNewSell, newProductProductList);
+
+    update(["home"]);
   }
 
   void onTap() {}
@@ -206,11 +219,6 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
-    // 保存离线数据
-    Storage().setJson(Constants.storageHomeBanner, bannerItems);
-    Storage().setJson(Constants.storageHomeCategories, categoryItems);
-    Storage().setJson(Constants.storageHomeFlashSell, flashShellProductList);
-    Storage().setJson(Constants.storageHomeNewSell, newProductProductList);
     super.dispose();
     // 刷新控制器释放
     refreshController.dispose();

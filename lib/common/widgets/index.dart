@@ -7,3 +7,4 @@ export "button.dart";
 export "input.dart";
 
 export './form/input.dart';
+export "./avatar.dart";
