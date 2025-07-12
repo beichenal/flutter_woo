@@ -2,6 +2,7 @@ import 'package:ducafe_ui_core/ducafe_ui_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_woo/common/index.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import 'index.dart';
 import 'widgets/tab_detail.dart';
@@ -169,6 +170,7 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
       // 加入购物车
       ButtonWidget.outline(
         LocaleKeys.gDetailBtnAddCart.tr,
+        scale: WidgetScale.large,
       ).expanded(),
 
       // 间距
@@ -177,6 +179,7 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
       // 立刻购买
       ButtonWidget.primary(
         LocaleKeys.gDetailBtnBuy.tr,
+        scale: WidgetScale.large,
       ).expanded(),
     ]
         .toRow(
@@ -202,9 +205,6 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
 
             // TabView 视图
             _buildTabView(),
-
-            // 底部按钮
-            _buildButtons(context),
           ].toColumn();
   }
 
@@ -224,7 +224,17 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
                   controller.product?.name ?? LocaleKeys.gDetailTitle.tr),
           // 内容
           body: SafeArea(
-            child: _buildView(context),
+            child: <Widget>[
+              // 主视图
+              SmartRefresher(
+                controller: controller.mainRefreshController, // 刷新控制器
+                onRefresh: controller.onMainRefresh, // 下拉刷新回调
+                child: _buildView(context),
+              ).expanded(),
+
+              // 底部按钮
+              _buildButtons(context),
+            ].toColumn(),
           ),
         );
       },
