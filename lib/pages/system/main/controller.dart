@@ -45,7 +45,12 @@ class MainController extends GetxController {
 
   // 切换页面
   void onJumpToPage(int page) {
-    pageController.jumpToPage(page);
+    // 除了首页，其它页面都需要登录
+    if (false && (page != 0) && !UserService.to.isLogin) {
+      Get.toNamed(RouteNames.systemLogin);
+    } else {
+      pageController.jumpToPage(page);
+    }
   }
 
   _initData() async {

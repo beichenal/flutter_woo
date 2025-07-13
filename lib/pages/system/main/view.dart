@@ -98,9 +98,13 @@ class _MainViewGetX extends GetView<MainController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(
-      // init: Get.find<MainController>(),
       id: "main",
-      builder: (_) => _buildView(context),
+      builder: (_) {
+        return Scaffold(
+          // appBar: AppBar(title: const Text("main")),
+          body: _buildView(context),
+        );
+      },
     );
   }
 }
