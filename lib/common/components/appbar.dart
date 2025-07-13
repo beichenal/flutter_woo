@@ -23,7 +23,7 @@ AppBar mainAppBarWidget({
         ? SystemUiOverlayStyle.light
         : SystemUiOverlayStyle.dark,
     // 高度
-    toolbarHeight: 40,
+    toolbarHeight: 55,
 
     // 最左侧按钮
     leading: leading,

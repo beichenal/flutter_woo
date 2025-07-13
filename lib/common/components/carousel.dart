@@ -22,7 +22,7 @@ class CarouselWidget extends StatelessWidget {
   });
 
   /// 切换页码
-  final Function(int, CarouselPageChangedReason)? onPageChanged;
+  final dynamic Function(int, CarouselPageChangedReason)? onPageChanged;
 
   /// 点击
   final Function(int, KeyValueModel)? onTap;

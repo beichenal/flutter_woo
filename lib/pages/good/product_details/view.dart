@@ -10,7 +10,7 @@ import 'widgets/tab_product.dart';
 import 'widgets/tab_reviews.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  const ProductDetailsPage({Key? key}) : super(key: key);
+  const ProductDetailsPage({super.key});
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();

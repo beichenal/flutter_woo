@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter_woo/common/index.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
@@ -19,7 +20,7 @@ class HomeController extends GetxController {
   }
 
   // Banner 切换事件
-  void onChangeBanner(int index, /*CarouselPageChangedReason*/ reason) {
+  dynamic onChangeBanner(int index, CarouselPageChangedReason rason) {
     bannerCurrentIndex = index;
     update(["home_banner"]);
   }
@@ -171,21 +172,46 @@ class HomeController extends GetxController {
   _initData() async {
     // 首页
     // banner
-    bannerItems = await SystemApi.banners();
+    // bannerItems = await SystemApi.banners();
     // 分类
-    categoryItems = await ProductApi.categories();
+    // categoryItems = await ProductApi.categories();
 
     // 推荐商品
-    flashShellProductList =
-        await ProductApi.products(ProductsReq(featured: true));
+    // flashShellProductList =
+    //     await ProductApi.products(ProductsReq(featured: true));
     // 新商品
-    newProductProductList = await ProductApi.products(ProductsReq());
+    // newProductProductList = await ProductApi.products(ProductsReq());
 
     // 颜色
-    var attributeColors = await ProductApi.attributes(1);
+    // var attributeColors = await ProductApi.attributes(1);
 
     // 尺寸
-    var attributeSizes = await ProductApi.attributes(2);
+    // var attributeSizes = await ProductApi.attributes(2);
+
+    var result = await Future.wait([
+      SystemApi.banners(),
+      ProductApi.categories(),
+      ProductApi.products(ProductsReq(featured: true)),
+      ProductApi.products(ProductsReq()),
+      ProductApi.attributes(1),
+      ProductApi.attributes(2),
+      ProductApi.attributes(3),
+      ProductApi.attributes(4),
+      ProductApi.attributes(5)
+    ]);
+    bannerItems = result[0] as List<KeyValueModel<dynamic>>;
+    categoryItems = result[1] as List<CategoryModel>;
+    flashShellProductList = result[2] as List<ProductModel>;
+    newProductProductList = result[3] as List<ProductModel>;
+    var attributeColors = result[4] as List<AttributeModel>;
+    var attributeSizes = result[5] as List<AttributeModel>;
+
+    // 品牌
+    var attributeBrand = result[6] as List<AttributeModel>;
+    // 性别
+    var attributeGender = result[7] as List<AttributeModel>;
+    // 新旧
+    var attributeCondition = result[8] as List<AttributeModel>;
 
     // 保存离线数据 - 基础数据
     Storage()
@@ -200,7 +226,13 @@ class HomeController extends GetxController {
     Storage().setJson(Constants.storageHomeCategories, categoryItems);
     Storage().setJson(Constants.storageHomeFlashSell, flashShellProductList);
     Storage().setJson(Constants.storageHomeNewSell, newProductProductList);
-
+// 保存离线数据
+    Storage().setString(
+        Constants.storageProductsAttributesBrand, jsonEncode(attributeBrand));
+    Storage().setString(
+        Constants.storageProductsAttributesGender, jsonEncode(attributeGender));
+    Storage().setString(Constants.storageProductsAttributesCondition,
+        jsonEncode(attributeCondition));
     update(["home"]);
   }
 

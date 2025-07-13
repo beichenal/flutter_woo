@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_woo/common/index.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,7 @@ class ProductDetailsController extends GetxController
   int _reviewsPage = 1;
 
   // 评论 页尺寸
-  int _reviewsLimit = 20;
+  final int _reviewsLimit = 20;
 
   // 读取缓存
   _loadCache() async {
@@ -209,7 +210,7 @@ class ProductDetailsController extends GetxController
   }
 
   // Banner 切换事件
-  void onChangeBanner(int index, _reason) {
+  dynamic onChangeBanner(int index, CarouselPageChangedReason reason) {
     bannerCurrentIndex = index;
     update(["product_banner"]); // 手动刷新 Banner
   }
